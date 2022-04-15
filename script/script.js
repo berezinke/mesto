@@ -10,7 +10,7 @@ let jobInput = object_profeccion.textContent;
 
 let object_name_change = document.querySelector('#change-name');
 let object_profeccion_change = document.querySelector('#change-profeccion');
-let button_sibmit = document.querySelector('#ButtonSubmit');
+let button_submit = document.querySelector('#ButtonSubmit');
 
 button_changeData.onclick = function() {
     popup_styles.classList.add('popup_opened');
@@ -20,12 +20,13 @@ button_changeData.onclick = function() {
 button_NochangeData.onclick = function() {
     popup_styles.classList.remove('popup_opened');
 };
-button_sibmit.onclick = function() {
-    evt.preventDefault();
+button_submit.onclick = function() {
+    event.preventDefault();
     object_name.textContent = object_name_change.value;
     object_profeccion.textContent = object_profeccion_change.value;
     nameInput = object_name.textContent;
     jobInput = object_profeccion.textContent;
+    popup_styles.classList.remove('popup_opened');
 }
 
 button_likedFirst.onclick = function() {
@@ -33,12 +34,12 @@ button_likedFirst.onclick = function() {
 };
 
 
-// function formSubmitHandler () {
-   // evt.preventDefault();
-   // object_name.textContent = object_name_change.value;
-   // object_profeccion.textContent = object_profeccion_change.value;
-   // console.log('5');
-   // console.log(object_name.textContent);
-   // console.log(object_profeccion.textContent);
-// }
-// ElementChanged.addEventListener('submit', formSubmitHandler);
+//function formSubmitHandler () {
+    //evt.preventDefault();
+    //object_name.textContent = object_name_change.value;
+    //object_profeccion.textContent = object_profeccion_change.value;
+    //console.log('5');
+    //console.log(object_name.textContent);
+    //console.log(object_profeccion.textContent);
+//}
+//button_submit.addEventListener('submit', formSubmitHandler);
