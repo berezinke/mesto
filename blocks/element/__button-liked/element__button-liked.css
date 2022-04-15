@@ -16,7 +16,7 @@
   width: 22px;
   height: 19px;
   background-color: #ffffff;
-  content: "";  
+  content: "";
   background-image: url('../../../images/heart_blanc.png');
 }
 .element__button-liked::before:hover{
@@ -29,6 +29,6 @@
   width: 22px;
   height: 19px;
   background-color: #ffffff;
-  content: "";  
+  content: "";
   background-image: url('../../../images/heart_black.png');
 }
