@@ -1,4 +1,4 @@
-.profile-change__nosave {
+.nosave {
   padding: 0;
   margin: 0;
   margin-bottom: 8px;
@@ -10,13 +10,6 @@
   cursor: pointer;
   border: none;
 }
-.profile-change__nosave:hover {
+.nosave:hover {
   opacity: 0.6;
 }
-
-/*@media screen and (max-width: 460px) {
-  .profile-change__nosave{
-    width: 20px;
-    height: 20px;
-   
-}*/

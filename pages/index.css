@@ -36,10 +36,10 @@
 @import url("../blocks/popup/_opened/popup_opened.css");
 
 @import url("../blocks/profile-change/profile-change.css");
-@import url("../blocks/profile-change/__nosave/profile-change__nosave.css");
 @import url("../blocks/profile-change/__input/profile-change__input.css");
 @import url("../blocks/profile-change/__submit/profile-change__submit.css");
 @import url("../blocks/profile-change/__title/profile-change__title.css");
 @import url("../blocks/profile-change/__border/profile-change__border.css");
 
 @import url("../blocks/popup/__container/popup__container.css");
+@import url("../blocks/nosave/nosave.css");
