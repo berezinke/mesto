@@ -1,0 +1,45 @@
+@import url("../vendor/normalize.css");
+
+@import url("../blocks/page/page.css");
+
+@import url("../fonts/inter.css");
+
+@import url("../blocks/body/body.css");
+
+@import url("../blocks/header/header.css");
+@import url("../blocks/logo/logo.css");
+
+@import url("../blocks/profile/profile.css");
+@import url("../blocks/profile/__addbutton/profile__addbutton.css");
+@import url("../blocks/profile/__avatar/profile__avatar.css");
+@import url("../blocks/profile/__info/profile__info.css");
+@import url("../blocks/profile/__information/profile__information.css");
+@import url("../blocks/profile/__text/profile__text.css");
+@import url("../blocks/profile/__title/profile__title.css");
+@import url("../blocks/profile/__subtitle/profile__subtitle.css");
+@import url("../blocks/profile/__edit/profile__edit.css");
+@import url("../blocks/profile/__button-image/profile__button-image.css");
+
+
+@import url("../blocks/elements/elements.css");
+@import url("../blocks/element/element.css");
+@import url("../blocks/element/__image/element__image.css");
+@import url("../blocks/element/__info/element__info.css");
+@import url("../blocks/element/__info-text/element__info-text.css");
+@import url("../blocks/element/__info-like/element__info-like.css");
+@import url("../blocks/element/__button-liked/element__button-liked.css");
+
+@import url("../blocks/footer/footer.css");
+@import url("../blocks/footer/__copyright/footer__copyright.css");
+
+@import url("../blocks/popup/popup.css");
+@import url("../blocks/popup/_opened/popup_opened.css");
+
+@import url("../blocks/profile-change/profile-change.css");
+@import url("../blocks/profile-change/__nosave/profile-change__nosave.css");
+@import url("../blocks/profile-change/__input/profile-change__input.css");
+@import url("../blocks/profile-change/__submit/profile-change__submit.css");
+@import url("../blocks/profile-change/__title/profile-change__title.css");
+@import url("../blocks/profile-change/__border/profile-change__border.css");
+
+@import url("../blocks/popup/__container/popup__container.css");
