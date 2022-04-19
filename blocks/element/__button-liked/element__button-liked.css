@@ -1,34 +1,17 @@
 .element__button-liked {
   position: relative;
-  margin: 0;
-  margin-right: 20px;
-  margin-left: 0;
-  padding: 0;
-  width: 22px;
-  height: 19px;
+  margin: 0 21px 0 0;
+  padding: 5px 5px 0 0;
+  max-width: 22px;
+  max-height: 19px;
+  width: 100%;
+  height: 100%;
   border: none;
   cursor: pointer;
-}
-.element__button-liked::before{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 22px;
-  height: 19px;
-  background-color: #ffffff;
-  content: "";
+  background-color: white;
   background-image: url('../../../images/heart_blanc.png');
 }
-.element__button-liked::before:hover{
+
+.element__button-liked:hover{
   opacity: 0.6;
-}
-.element__button-liked:checked::before{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 22px;
-  height: 19px;
-  background-color: #ffffff;
-  content: "";
-  background-image: url('../../../images/heart_black.png');
 }

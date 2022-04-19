@@ -9,7 +9,7 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="images/header-logo_comp.png" alt="Лого Место" class="logo">
+      <img src="images/header-logo.png" alt="Лого Место" class="logo">
     </header>
     <main>
       <section class="profile">
@@ -20,7 +20,7 @@
               <h2 class="profile__title" id="nameScientist">
                 Жак-Ив Кусто 
               </h2>
-              <button class="profile__edit" id="button_edit">
+              <button type="button" class="profile__edit" id="button_edit">
                 <img src="images/pen.png" alt="Редактировать" class="profile__button-image">
               </button>
             </div>
@@ -29,49 +29,51 @@
             </h3>
           </div>
         </div>
-        <input type="button" class="profile__addbutton" value="+">
+        <button type="button" class="profile__addbutton">
+          <img src="images/Plus.png" alt="Плюс" class="profile__plus">
+        </button>
       </section>
       <section class="elements">
         <div class="element">
           <img class="element__image" src="images/flower_comp.jpg" alt="Цветок">
           <div class="element__info">
             <p class="element__info-text">Красивенький красненький цветочек</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_first">
+            <button type="button" class="element__button-liked" id="button_like_first"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="images/mount-lake_comp.jpg" alt="Озеро">
           <div class="element__info">
             <p class="element__info-text">Озеро</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_second">
+            <button type="button" class="element__button-liked" id="button_like_second"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="images/path_comp.jpg" alt="Тропа">
           <div class="element__info">
             <p class="element__info-text">Тропа</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_third">
+            <button type="button" class="element__button-liked" id="button_like_third"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="images/stars_comp.jpg" alt="Звезды">
           <div class="element__info">
             <p class="element__info-text">Звезды</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_forth">
+            <button type="button" class="element__button-liked" id="button_like_forth"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="images/vodopad_comp.jpg" alt="Водопад">
           <div class="element__info">
             <p class="element__info-text">Водопад</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_fifth">
+            <button type="button" class="element__button-liked" id="button_like_fifth"></button>
           </div>
         </div>
         <div class="element">
           <img class="element__image" src="images/wet_comp.jpg" alt="Туман">
           <div class="element__info">
             <p class="element__info-text">Туман</p>
-            <input type="checkbox" class="element__button-liked" id="button_like_sixth">
+            <button type="button" class="element__button-liked" id="button_like_sixth"></button>
           </div>
         </div>
       </section>
@@ -83,17 +85,15 @@
     </footer>
     <div class="popup">
       <div class="popup__container">
-        <button class="nosave" id="button_NoSave">
-          <img src="images/CloseIcon.png" alt="Х">
+        <button type="button" class="nosave" id="button_NoSave">
+          <img src="images/CloseIcon.png" alt="Х" class="nosave__image">
         </button>
         <form class="profile-change">
           <p class="profile-change__title">
             Редактировать профиль
           </p>
           <input type="text" class="profile-change__input" name="name" value="Ж" id="change-name">
-          <p class="profile-change__border"></p>
           <input type="text" class="profile-change__input" name="profeccion" value="И" id="change-profeccion">
-          <p class="profile-change__border"></p>
           <button type="submit" class="profile-change__submit" id="ButtonSubmit">Сохранить</button>
         </form>
       </div>

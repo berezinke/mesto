@@ -1,11 +1,9 @@
 .element__info {
-  margin: 0;
+  margin: 25px 0 31px;
   padding: 0;
+  /*padding-right: 5px;*/
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: none;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
   }
