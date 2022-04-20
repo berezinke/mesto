@@ -1,7 +1,6 @@
 .element__info {
-  margin: 25px 0 31px;
+  margin: 25px 0 27px;
   padding: 0;
-  /*padding-right: 5px;*/
   width: 100%;
   display: flex;
   justify-content: space-between;

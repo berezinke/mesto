@@ -1,22 +1,18 @@
-.nosave {
+.popup__nosave-button {
   padding: 0;
   margin: 0;
   margin-bottom: 8px;
-  /*width: 32px;
-  height: 32px;*/
-  background-color: black;
   opacity: 1;
   z-index: 5;
+  background-color: rgba(247, 247, 247, 0);
   cursor: pointer;
   border: none;
 }
-.nosave:hover {
+.popup__nosave-button:hover {
   opacity: 0.6;
 }
-
 @media screen and (max-width: 400px) {
-  .nosave{
-    /*width: 20px;*/
+  .popup__nosave-button{
     margin-bottom: 16px;
   }
 }

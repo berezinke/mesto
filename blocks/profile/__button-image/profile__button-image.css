@@ -1,5 +1,13 @@
 .profile__button-image {
   padding: 0;
-  margin: 0;
-  object-fit: contain;
+  margin: auto;
+  object-fit: cover;
+  width: 10px;
+  height: 10px;
+}
+@media screen and (max-width: 320px) {
+  .profile__button-image{
+    width: 9px;
+    height: 9px;
+  }
 }

@@ -9,9 +9,8 @@
   border: none;
   cursor: pointer;
   background-color: white;
-  background-image: url('../../../images/heart_blanc.png');
+  background-image: url('../../../images/heart_blanc.svg');
 }
-
 .element__button-liked:hover{
-  opacity: 0.6;
+  opacity: 0.5;
 }
