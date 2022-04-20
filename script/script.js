@@ -24,7 +24,7 @@ document.querySelector('#ButtonSubmit').addEventListener('click', function() {
 // Конец редактирования в попАп
 
 // Выделение понравившихся
-let arrPictures = document.querySelectorAll('#button_like');
+let arrPictures = document.querySelectorAll('.element__button-liked');
 function isLiked () {
     for (let i = 0; i < arrPictures.length; i++) {
         arrPictures[i].addEventListener('click', function() {
