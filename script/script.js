@@ -31,12 +31,12 @@ formChange.addEventListener('submit', function() {
 
 // Выделение понравившихся. 
 // Я не могу это убрать, поскольку оно включает сердечки
-let arrPictures = document.querySelectorAll('.element__button-liked');
-function isLiked () {
-    for (let i = 0; i < arrPictures.length; i++) {
-        arrPictures[i].addEventListener('click', function() {
-            arrPictures[i].classList.toggle('element__button-liked_activ')});
-    };
-}
-isLiked();
+// let arrPictures = document.querySelectorAll('.element__button-liked');
+// function isLiked () {
+//    for (let i = 0; i < arrPictures.length; i++) {
+//       arrPictures[i].addEventListener('click', function() {
+//       arrPictures[i].classList.toggle('element__button-liked_activ')});
+//    };
+// }
+// isLiked();
 // Конец выделения понравившихся
