@@ -1,6 +1,11 @@
 let popupStyles = document.querySelector('.popup');
 let objectNameChange = document.querySelector('#change-name');
 let objectProfeccionChange = document.querySelector('#change-profeccion');
+let buttonEdit = document.querySelector('#button_edit');
+let nameScInitial = document.querySelector('#nameScientist');
+let profInitial = document.querySelector('#profeccionScientist');
+let buttonNoSave = document.querySelector('#button_NoSave');
+let formChange = document.querySelector('.profile-change');
 
 // Редактирование в попАп
 function popUpOpened() {
@@ -9,21 +14,23 @@ function popUpOpened() {
 function popUpClosed() {
     popupStyles.classList.remove('popup_opened');
 };
-document.querySelector('#button_edit').addEventListener('click', function() {
+buttonEdit.addEventListener('click', function() {
     popUpOpened();
-    objectNameChange.value = document.querySelector('#nameScientist').textContent.trim();
-    objectProfeccionChange.value = document.querySelector('#profeccionScientist').textContent.trim();
+    objectNameChange.value = nameScInitial.textContent.trim();
+    objectProfeccionChange.value = profInitial.textContent.trim();
 });
-document.querySelector('#button_NoSave').addEventListener('click', popUpClosed);
-document.querySelector('#ButtonSubmit').addEventListener('click', function() {
+buttonNoSave.addEventListener('click', popUpClosed);
+
+formChange.addEventListener('submit', function() {
     event.preventDefault();
-    document.querySelector('#nameScientist').textContent = objectNameChange.value;
-    document.querySelector('#profeccionScientist').textContent = objectProfeccionChange.value;
+    nameScInitial.textContent = objectNameChange.value;
+    profInitial.textContent = objectProfeccionChange.value;
     popUpClosed();
 });
 // Конец редактирования в попАп
 
-// Выделение понравившихся
+// Выделение понравившихся. 
+// Я не могу это убрать, поскольку оно включает сердечки
 let arrPictures = document.querySelectorAll('.element__button-liked');
 function isLiked () {
     for (let i = 0; i < arrPictures.length; i++) {
