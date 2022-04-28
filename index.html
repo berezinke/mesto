@@ -34,61 +34,29 @@
         </button>
       </section>
       <section class="elements">
-        <div class="element">
-          <img class="element__image" src="images/flower_comp.jpg" alt="Цветок">
-          <div class="element__info">
-            <h3 class="element__info-text">Красивенький красненький цветочек</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="images/mount-lake_comp.jpg" alt="Озеро">
-          <div class="element__info">
-            <h3 class="element__info-text">Озеро</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="images/path_comp.jpg" alt="Тропа">
-          <div class="element__info">
-            <h3 class="element__info-text">Тропа</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="images/stars_comp.jpg" alt="Звезды">
-          <div class="element__info">
-            <h3 class="element__info-text">Звезды</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="images/vodopad_comp.jpg" alt="Водопад">
-          <div class="element__info">
-            <h3 class="element__info-text">Водопад</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img class="element__image" src="images/wet_comp.jpg" alt="Туман">
-          <div class="element__info">
-            <h3 class="element__info-text">Туман</h3>
-            <button type="button" class="element__button-liked"></button>
-          </div>
-        </div>
       </section>
+      <template id="elementTemplate">
+        <div class="element">
+          <img class="element__image" src="" alt="Картинка">
+          <button type='button' class="element__basura"></button>
+          <div class="element__info">
+            <h3 class="element__info-text"></h3>
+            <button type="button" class="element__button-liked"></button>
+          </div>
+        </div>
+      </template>
     </main>
     <footer class="footer">      
       <p class="footer__copyright">
         &copy; Mesto Russia
       </p>
     </footer>
-    <div class="popup">
+    <div class="popup" id="popEdit">
       <div class="popup__container">
-        <button type="button" class="popup__nosave-button" id="button_NoSave">
+        <button type="button" class="popup__nosave-button" id="buttonNoSave">
           <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
         </button>
-        <form class="profile-change" name="infoChanged">
+        <form class="profile-change" name="infoChanged" id="profileEdit">
           <h3 class="profile-change__title">
             Редактировать профиль
           </h3>
@@ -96,6 +64,32 @@
           <input type="text" class="profile-change__input" name="profeccion" value="" id="change-profeccion">
           <button type="submit" class="profile-change__submit" id="ButtonSubmit">Сохранить</button>
         </form>
+      </div>
+    </div>
+    <div class="popup" id="popAddPicture">
+      <div class="popup__container">
+        <button type="button" class="popup__nosave-button" id="buttonNoSavePic">
+          <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
+        </button>
+        <form class="profile-change" name="infoChanged" id="cardAdd">
+          <h3 class="profile-change__title">
+            Новое место
+          </h3>
+          <input type="text" class="profile-change__input" name="name" value="Пример названия" id="namePicNew">
+          <input type="text" class="profile-change__input" name="picture" value="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" id="placePicNew">
+          <button type="submit" class="profile-change__submit" id="ButtonCreate">Создать</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="popShowPicture">
+      <div class="popup__show">
+        <button type="button" class="popup__nosave-button">
+          <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
+        </button>
+        <div class="popup__list">
+          <img src="images/closeIcon.svg" alt="Отмена" class="popup__bigpicture" id="popShowPic">
+          <p class="popup__text" id="popShowText">tt</p>
+        </div>        
       </div>
     </div>
   </div>
