@@ -46,7 +46,7 @@
         </div>
       </template>
     </main>
-    <footer class="footer">      
+    <footer class="footer">
       <p class="footer__copyright">
         &copy; Mesto Russia
       </p>
@@ -54,14 +54,14 @@
     <div class="popup" id="popEdit">
       <div class="popup__container">
         <button type="button" class="popup__nosave-button" id="buttonNoSave">
-          <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
+          <img src="images/closeIcon.svg" alt="Не сохранять" class="popup__nosave-image">
         </button>
         <form class="profile-change" name="infoChanged" id="profileEdit">
           <h3 class="profile-change__title">
             Редактировать профиль
           </h3>
-          <input type="text" class="profile-change__input" name="name" value="" id="change-name">
-          <input type="text" class="profile-change__input" name="profeccion" value="" id="change-profeccion">
+          <input type="text" class="profile-change__input" name="nameK" value="" id="change-name" placeholder="Ваше имя">
+          <input type="text" class="profile-change__input" name="profeccionK" value="" id="change-profeccion" placeholder="Ваша профессия">
           <button type="submit" class="profile-change__submit" id="ButtonSubmit">Сохранить</button>
         </form>
       </div>
@@ -69,14 +69,14 @@
     <div class="popup" id="popAddPicture">
       <div class="popup__container">
         <button type="button" class="popup__nosave-button" id="buttonNoSavePic">
-          <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
+          <img src="images/closeIcon.svg" alt="Не сохранять" class="popup__nosave-image">
         </button>
         <form class="profile-change" name="infoChanged" id="cardAdd">
           <h3 class="profile-change__title">
             Новое место
           </h3>
-          <input type="text" class="profile-change__input" name="name" value="Пример названия" id="namePicNew">
-          <input type="text" class="profile-change__input" name="picture" value="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg" id="placePicNew">
+          <input type="text" class="profile-change__input" name="namePl" id="namePicNew" placeholder="Название места">
+          <input type="text" class="profile-change__input" name="picturePl" id="placePicNew" placeholder="Адрес картинки">
           <button type="submit" class="profile-change__submit" id="ButtonCreate">Создать</button>
         </form>
       </div>
@@ -84,7 +84,7 @@
     <div class="popup" id="popShowPicture">
       <div class="popup__show">
         <button type="button" class="popup__nosave-button">
-          <img src="images/closeIcon.svg" alt="Отмена" class="popup__nosave-image">
+          <img src="images/closeIcon.svg" alt="Выйти" class="popup__nosave-image">
         </button>
         <div class="popup__list">
           <img src="images/closeIcon.svg" alt="Отмена" class="popup__bigpicture" id="popShowPic">
@@ -93,6 +93,7 @@
       </div>
     </div>
   </div>
-  <script src="script/script.js"></script> 
+  <script src="script/script__data.js"></script>
+  <script src="script/script.js"></script>
 </body>
 </html>
