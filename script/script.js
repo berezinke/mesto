@@ -20,11 +20,19 @@ const popupPicture = document.querySelector('#popShowPicture');
 const buttonClosePopup = document.querySelectorAll('.popup');
 
 // Открытие, редактирование и закрытие попАп
-function openPopUp(idPop) {
-   idPop.classList.add('popup_opened');
+function openPopUp(popUp) {
+   popUp.classList.add('popup_opened');
 };
-function closePopUp(popupNoSave) {
-   popupNoSave.classList.remove('popup_opened');
+function closePopUp(popUp) {
+   popUp.classList.remove('popup_opened');
+};
+function closeEsc(Pop) {
+   addEventListener('keydown', function(evt) {
+      if (evt.key === 'Escape') {
+         Pop.querySelector('.profile-change').reset();
+         closePopUp(Pop);
+      };
+   });
 };
 
 // Создание первоначальных картинок
@@ -59,11 +67,11 @@ function createCard(elementArrCard) {
 };
 
 for (let i = 0; i < buttonClosePopup.length; i++) {
-   buttonClosePopup[i].querySelector('.popup__nosave-button').addEventListener('click', function() {
-      if (buttonClosePopup[i].querySelector('.profile-change') !== null) {
+   buttonClosePopup[i].addEventListener('click', function(evt) {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__nosave-image')) {
          buttonClosePopup[i].querySelector('.profile-change').reset();
+         closePopUp(buttonClosePopup[i]);
       };
-      closePopUp(buttonClosePopup[i]);
    });
 };
 
@@ -75,7 +83,8 @@ for (let i = initialCards.length - 1; i >= 0; i--) {
 buttonEdit.addEventListener('click', function() {
    nameCh.value = nameInKusto.textContent.trim();
    infoCh.value = infoInKusto.textContent.trim(); 
-   openPopUp(popupProfile);     
+   openPopUp(popupProfile);
+   closeEsc(popupProfile);
 });
 formEditProfile.addEventListener('submit', function() {
    event.preventDefault();
@@ -86,12 +95,21 @@ formEditProfile.addEventListener('submit', function() {
 
 
 // Вставка новой карточки
-buttonAddPicture.addEventListener('click', function() {
-   openPopUp(popupCard);
-});
-formAddCard.addEventListener('submit', function() {
+function addNewCard() {
    event.preventDefault();
    addCardElement(createCard({name: nameInCard.value, link: infoInCard.value}),cardsPosition);
    formAddCard.reset();
    closePopUp(popupCard);
+};
+buttonAddPicture.addEventListener('click', function() {
+   openPopUp(popupCard);
+   closeEsc(popupCard);
+});
+formAddCard.addEventListener('submit', function() {
+   addNewCard();
+});
+formAddCard.addEventListener('keydown', function(evt) {
+   if (evt.key === 'Enter' && isValidEnter) {
+      addNewCard();
+   }
 });

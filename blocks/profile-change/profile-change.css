@@ -14,9 +14,3 @@
     width: calc(0.15417*100vw + 233px);
   }
 }
-
-/*@media screen and (max-width: 320px) {
-  .profile-change{
-    width: 282px;
-  }
-}*/

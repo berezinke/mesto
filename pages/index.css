@@ -49,3 +49,8 @@
 @import url("../blocks/popup/__list/popup__list.css");
 @import url("../blocks/popup/__show/popup__show.css");
 @import url("../blocks/popup/__text/popup__text.css");
+
+@import url("../blocks/profile-change/__error/profile-change__error.css");
+@import url("../blocks/profile-change/__error/_visible/profile-change__error_visible.css");
+@import url("../blocks/profile-change/__input/_type_error/profile-change__input_type_error.css");
+@import url("../blocks/profile-change/__submit/_disabled/profile-change__submit_disabled.css");
