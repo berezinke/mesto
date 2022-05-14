@@ -1,5 +1,3 @@
-let isValidEnter = false;
-
 function enableValidation(validationObject) {
   const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
   formList.forEach((formElement) => {
@@ -19,15 +17,17 @@ function setEventListeners(formElement) {
   });
 };
 
+function disabledButton(buttonElement) {
+  buttonElement.classList.add(validationObject.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', true);
+}
+
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(validationObject.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
-    isValidEnter = false;
+    disabledButton(buttonElement);
   }  else {
     buttonElement.classList.remove(validationObject.inactiveButtonClass);
     buttonElement.removeAttribute('disabled');
-    isValidEnter = true;
   };
 };
 

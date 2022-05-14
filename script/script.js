@@ -18,22 +18,34 @@ const popupCard = document.querySelector('#popAddPicture');
 const popupPicture = document.querySelector('#popShowPicture');
 
 const buttonClosePopup = document.querySelectorAll('.popup');
+let popIn = {};
 
 // Открытие, редактирование и закрытие попАп
 function openPopUp(popUp) {
+   const buttonElement = popUp.querySelector(validationObject.submitButtonSelector);
+   if (buttonElement) {
+      disabledButton(buttonElement);
+   };
+   if (popUp.id === "popAddPicture") {
+      popUp.querySelector('.profile-change').reset();
+   }
+
    popUp.classList.add('popup_opened');
+   popIn = popUp;
+   addEventListener('keydown', listenKeydown);
 };
 function closePopUp(popUp) {
+   removeEventListener('keydown', listenKeydown);
    popUp.classList.remove('popup_opened');
 };
-function closeEsc(Pop) {
-   addEventListener('keydown', function(evt) {
-      if (evt.key === 'Escape') {
-         Pop.querySelector('.profile-change').reset();
-         closePopUp(Pop);
-      };
-   });
-};
+function listenKeydown(evt) {
+   if (evt.key === 'Escape') {
+      closePopUp(popIn);
+   };
+   if (evt.key === 'Enter' && !popIn.querySelector(validationObject.submitButtonSelector).classList.contains(validationObject.inactiveButtonClass) && popIn.id === "popAddPicture") {
+      addNewCard();
+   }
+}
 
 // Создание первоначальных картинок
 function addCardElement(card, cardsPosition) {
@@ -69,7 +81,9 @@ function createCard(elementArrCard) {
 for (let i = 0; i < buttonClosePopup.length; i++) {
    buttonClosePopup[i].addEventListener('click', function(evt) {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__nosave-image')) {
-         buttonClosePopup[i].querySelector('.profile-change').reset();
+         if (buttonClosePopup[i].querySelector('.profile-change')) {
+            buttonClosePopup[i].querySelector('.profile-change').reset();
+         };
          closePopUp(buttonClosePopup[i]);
       };
    });
@@ -84,7 +98,6 @@ buttonEdit.addEventListener('click', function() {
    nameCh.value = nameInKusto.textContent.trim();
    infoCh.value = infoInKusto.textContent.trim(); 
    openPopUp(popupProfile);
-   closeEsc(popupProfile);
 });
 formEditProfile.addEventListener('submit', function() {
    event.preventDefault();
@@ -103,13 +116,7 @@ function addNewCard() {
 };
 buttonAddPicture.addEventListener('click', function() {
    openPopUp(popupCard);
-   closeEsc(popupCard);
 });
 formAddCard.addEventListener('submit', function() {
-   addNewCard();
-});
-formAddCard.addEventListener('keydown', function(evt) {
-   if (evt.key === 'Enter' && isValidEnter) {
-      addNewCard();
-   }
+   addNewCard();   
 });
