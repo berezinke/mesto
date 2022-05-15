@@ -1,32 +1,39 @@
 function enableValidation(validationObject) {
   const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
+  const classInput = validationObject.inputSelector;
+  const classButtonSubmit = validationObject.submitButtonSelector;
+  const classButtonSubmitInactiv = validationObject.inactiveButtonClass;
+  const classInputError = validationObject.inputErrorClass;
+  const inputErrorVisible = validationObject.errorClass;
+
   formList.forEach((formElement) => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, classInput, classButtonSubmit, classButtonSubmitInactiv, classInputError, inputErrorVisible);
   });
 };
 
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll(validationObject.inputSelector));
-  const buttonElement = formElement.querySelector(validationObject.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+function setEventListeners(formElement, classInput, classButtonSubmit, classButtonSubmitInactiv, classInputError, inputErrorVisible) {
+  const inputList = Array.from(formElement.querySelectorAll(classInput));
+  const buttonElement = formElement.querySelector(classButtonSubmit);
+  toggleButtonState(inputList, buttonElement, classButtonSubmitInactiv);
   inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, classInputError, inputErrorVisible);
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, classInputError, inputErrorVisible);
+      toggleButtonState(inputList, buttonElement, classButtonSubmitInactiv);
     });
   });
 };
 
-function disabledButton(buttonElement) {
-  buttonElement.classList.add(validationObject.inactiveButtonClass);
+function disabledButton(buttonElement, classButtonSubmitInactiv) {
+  buttonElement.classList.add(classButtonSubmitInactiv);
   buttonElement.setAttribute('disabled', true);
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleButtonState(inputList, buttonElement, classButtonSubmitInactiv) {
   if (hasInvalidInput(inputList)) {
-    disabledButton(buttonElement);
+    disabledButton(buttonElement, classButtonSubmitInactiv);
   }  else {
-    buttonElement.classList.remove(validationObject.inactiveButtonClass);
+    buttonElement.classList.remove(classButtonSubmitInactiv);
     buttonElement.removeAttribute('disabled');
   };
 };
@@ -37,25 +44,25 @@ const hasInvalidInput = (inputList) => {
   })
 };
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, classInputError, inputErrorVisible) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(validationObject.inputErrorClass);
+  inputElement.classList.add(classInputError);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(validationObject.errorClass);
+  errorElement.classList.add(inputErrorVisible);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, classInputError, inputErrorVisible) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(validationObject.inputErrorClass);
-  errorElement.classList.remove(validationObject.errorClass);
+  inputElement.classList.remove(classInputError);
+  errorElement.classList.remove(inputErrorVisible);
   errorElement.textContent = 'Ок';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, classInputError, inputErrorVisible) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, classInputError, inputErrorVisible);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, classInputError, inputErrorVisible);
   }
 };
 
