@@ -1,4 +1,4 @@
-const initialCards = [
+export const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -23,13 +23,16 @@ const initialCards = [
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
-  ];
+];
 
-  const validationObject = {
-    formSelector: '.profile-change',
-    inputSelector: '.profile-change__input',
-    submitButtonSelector: '.profile-change__submit',
-    inactiveButtonClass: 'profile-change__submit_disabled',
-    inputErrorClass: 'profile-change__input_type_error',
-    errorClass: 'profile-change__error_visible'
-  };
+export const validationObject = {
+  formSelector: '.profile-change',
+  inputSelector: '.profile-change__input',
+  submitButtonSelector: '.profile-change__submit',
+  inactiveButtonClass: 'profile-change__submit_disabled',
+  inputErrorClass: 'profile-change__input_type_error',
+  errorClass: 'profile-change__error_visible'
+};
+
+export const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
+  

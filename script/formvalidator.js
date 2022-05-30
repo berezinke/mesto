@@ -1,14 +1,4 @@
-const validationObject = {
-  formSelector: '.profile-change',
-  inputSelector: '.profile-change__input',
-  submitButtonSelector: '.profile-change__submit',
-  inactiveButtonClass: 'profile-change__submit_disabled',
-  inputErrorClass: 'profile-change__input_type_error',
-  errorClass: 'profile-change__error_visible'
-};
-const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
-
-class FormValidator {
+export default class FormValidator {
   constructor(validationObject, formElement) {
     this._validationData=validationObject
     this._elementValidation = formElement;
@@ -69,7 +59,7 @@ class FormValidator {
       this._showInputError(formElement, inputElement, inputElement.validationMessage, classInputError, inputErrorVisible);
     } else {
       this._hideInputError(formElement, inputElement, classInputError, inputErrorVisible);
-    }
+    };
   };
 
   enableValidation() {
@@ -80,10 +70,5 @@ class FormValidator {
     const inputErrorVisible = this._validationData.errorClass;
 
     this._setEventListeners(this._elementValidation, classInput, classButtonSubmit, classButtonSubmitInactiv, classInputError, inputErrorVisible);
-  }
-}
-
-formList.forEach((formElement) => {
-  const formValid = new FormValidator(validationObject, formElement);
-  formValid.enableValidation();
-});
+  };
+};
