@@ -1,3 +1,8 @@
+import {initialCards, validationObject, formList} from './script__data.js';
+import Card from './card.js';
+import FormValidator from './formvalidator.js';
+import {openPopUp, closePopUp} from './utils.js';
+
 const buttonEdit = document.querySelector('#button_edit'); // Кусто
 const nameInKusto = document.querySelector('#nameScientist');
 const infoInKusto = document.querySelector('#profeccionScientist');
@@ -16,32 +21,15 @@ const popupCard = document.querySelector('#popAddPicture');
 
 const listPopUp = document.querySelectorAll('.popup');
 
-import {initialCards, validationObject, formList} from './script__data.js';
-import Card from './card.js';
-import FormValidator from './formvalidator.js';
-
-export default function openPopUp(popUp) {
-   popUp.classList.add('popup_opened');
-   addEventListener('keydown', listenKeydown);
-};
 function disableButtonPopUp(popUp, classInactivButton) {
    const buttonElement = popUp.querySelector(validationObject.submitButtonSelector);
    buttonElement.classList.add(classInactivButton);
    buttonElement.setAttribute('disabled', true);
 };
-function resetPopUp(popUp) {
-   popUp.querySelector('.profile-change').reset();
+function resetPopUp(popUp, classReset) {
+   popUp.querySelector(classReset).reset();
 };
-function closePopUp(popUp) {
-   removeEventListener('keydown', listenKeydown);
-   popUp.classList.remove('popup_opened');
-};
-function listenKeydown(evt) {
-   if (evt.key === 'Escape') {
-      let popOpen = document.querySelector('.popup_opened');
-      closePopUp(popOpen);
-   };   
-};
+
 function addFirstCardElement(card, cardsPosition) {
    cardsPosition.prepend(card);
 };
@@ -54,10 +42,16 @@ function createCard(elementArrCard, cardSelector) {
    return cardElement;
 };
 function initiatePop(popElement) {
-   resetPopUp(popElement);
+   resetPopUp(popElement, '.profile-change');
    disableButtonPopUp(popElement, validationObject.inactiveButtonClass);
    openPopUp(popElement);
 };
+function popCurrentInfo(arrayField, arrayValue) {
+   for (let i = 0; i < arrayField.length; i++) {
+      arrayField[i].value = arrayValue[i].textContent.trim();
+   };
+};
+
 function addNewCard() {
    event.preventDefault();
    addFirstCardElement(createCard({name: nameInCard.value, link: infoInCard.value}, '#elementTemplate'),cardsPosition);
@@ -86,6 +80,7 @@ initialCards.forEach((elementArrCard) => {
 // Редактирование Кусто
 buttonEdit.addEventListener('click', function() {
    initiatePop(popupProfile);
+   popCurrentInfo([nameCh, infoCh], [nameInKusto, infoInKusto]) 
 });
 formEditProfile.addEventListener('submit', function() {
    event.preventDefault();
