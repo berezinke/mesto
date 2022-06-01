@@ -9,37 +9,38 @@ export default class Card {
       const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
       return cardElement;
     };
+
     _toggleLike(buttonLiked) {
-      buttonLiked.addEventListener('click', function() {
-        buttonLiked.classList.toggle('element__button-liked_activ');
-      });
+      buttonLiked.classList.toggle('element__button-liked_activ');
     };
-    _trashElement(buttonTrash, elementInside) {
-      buttonTrash.addEventListener('click', function() {
-        elementInside.remove();
-      });
+    _trashElement(elementInside) {
+      elementInside.remove();
     };
-    _showBigPicture(buttonImage, popupPicture, picInfo) {
-      const picPicition = popupPicture.querySelector('.popup__bigpicture');
+    _showBigPicture(popupPicture, elementInside) {
+      const picPosition = popupPicture.querySelector('.popup__bigpicture');
       
-      buttonImage.addEventListener('click', function() {
-      picPicition.src = buttonImage.src;
-      picPicition.alt = 'Большая картинка';
-      popupPicture.querySelector('.popup__text').textContent = picInfo.textContent;
+      picPosition.src = elementInside.querySelector('.element__image').src;
+      picPosition.alt = 'Большая картинка';
+      popupPicture.querySelector('.popup__text').textContent = elementInside.querySelector('.element__info').textContent;
       openPopUp(popupPicture);
-      });
     };
     _setEventListeners() {
+      const objInside = this;
       const elementInside = this._element;
       const buttonLiked = elementInside.querySelector('.element__button-liked');
       const buttonTrash = elementInside.querySelector('.element__basura');
       const buttonImage = elementInside.querySelector('.element__image');
-      const picInfo = elementInside.querySelector('.element__info');
       const popupPicture = document.querySelector('#popShowPicture');
-       
-      this._toggleLike(buttonLiked);
-      this._trashElement(buttonTrash, elementInside);
-      this._showBigPicture(buttonImage, popupPicture, picInfo);       
+      
+      buttonLiked.addEventListener('click', function() {
+        objInside._toggleLike(buttonLiked);
+      });
+      buttonTrash.addEventListener('click', function() {
+        objInside._trashElement(elementInside)
+      });
+      buttonImage.addEventListener('click', function() {
+        objInside._showBigPicture(popupPicture, elementInside);
+      });
     };
 
     generateCard() {

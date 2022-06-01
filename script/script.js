@@ -26,10 +26,6 @@ function disableButtonPopUp(popUp, classInactivButton) {
    buttonElement.classList.add(classInactivButton);
    buttonElement.setAttribute('disabled', true);
 };
-function resetPopUp(popUp, classReset) {
-   popUp.querySelector(classReset).reset();
-};
-
 function addFirstCardElement(card, cardsPosition) {
    cardsPosition.prepend(card);
 };
@@ -42,7 +38,7 @@ function createCard(elementArrCard, cardSelector) {
    return cardElement;
 };
 function initiatePop(popElement) {
-   resetPopUp(popElement, '.profile-change');
+   popElement.querySelector('.profile-change').reset();
    disableButtonPopUp(popElement, validationObject.inactiveButtonClass);
    openPopUp(popElement);
 };
@@ -67,11 +63,13 @@ listPopUp.forEach((popUp) => {
    });
 });
 
-formList.forEach((formElement) => {
-   const formValid = new FormValidator(validationObject, formElement);
-   formValid.enableValidation();
+let arrValidate = [];
+formList.forEach((formElement, index) => {
+   const formValidity = new FormValidator(validationObject, formElement);
+   arrValidate.push(formValidity);
+   arrValidate[index].enableValidation();
  });
-
+ 
 initialCards.forEach((elementArrCard) => {
    addLastCardElement(createCard(elementArrCard, '#elementTemplate'), cardsPosition);
 });
