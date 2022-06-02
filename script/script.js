@@ -38,7 +38,6 @@ function createCard(elementArrCard, cardSelector) {
    return cardElement;
 };
 function initiatePop(popElement) {
-   popElement.querySelector('.profile-change').reset();
    disableButtonPopUp(popElement, validationObject.inactiveButtonClass);
    openPopUp(popElement);
 };
@@ -63,12 +62,11 @@ listPopUp.forEach((popUp) => {
    });
 });
 
-let arrValidate = [];
-formList.forEach((formElement, index) => {
-   const formValidity = new FormValidator(validationObject, formElement);
-   arrValidate.push(formValidity);
-   arrValidate[index].enableValidation();
- });
+const formProfileValidator = new FormValidator(validationObject, formList[0]);
+formProfileValidator.enableValidation();
+
+const formCardValidator = new FormValidator(validationObject, formList[1]);
+formCardValidator.enableValidation();
  
 initialCards.forEach((elementArrCard) => {
    addLastCardElement(createCard(elementArrCard, '#elementTemplate'), cardsPosition);
@@ -89,6 +87,7 @@ formEditProfile.addEventListener('submit', function() {
 
 // Вставка новой карточки
 buttonAddPicture.addEventListener('click', function() {
+   popupCard.querySelector('.profile-change').reset();
    initiatePop(popupCard);
 });
 formAddCard.addEventListener('submit', function() {   
