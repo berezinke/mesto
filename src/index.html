@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
+  <!--<link rel="stylesheet" href="pages/index.css">-->
   <title>Интересные места России</title>
 </head>
 <body class="body">
   <div class="page">
     <header class="header">
-      <img src="images/header-logo.svg" alt="Лого Место" class="logo">
+      <img src="<%=require('./images/header-logo.svg')%>" alt="Лого Место" class="logo">
     </header>
     <main>
       <section class="profile">
         <div class="profile__information">
-          <img src="images/profile-avatar.jpg" alt="Портрет Кусто" class="profile__avatar">
+          <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Портрет Кусто" class="profile__avatar">
           <div class="profile__info">
             <div class="profile__text">
               <h1 class="profile__title" id="nameScientist">
                 Жак-Ив Кусто 
               </h1>
               <button type="button" class="profile__edit-button" id="button_edit">
-                <img src="images/pen.svg" alt="Редактировать" class="profile__button-image">
+                <img src="<%=require('./images/pen.svg')%>" alt="Редактировать" class="profile__button-image">
               </button>
             </div>
             <p class="profile__subtitle" id="profeccionScientist">
@@ -30,14 +30,14 @@
           </div>
         </div>
         <button type="button" class="profile__add-button">
-          <img src="images/plus.svg" alt="Плюс" class="profile__plus">
+          <img src="<%=require('./images/plus.svg')%>" alt="Плюс" class="profile__plus">
         </button>
       </section>
       <section class="elements">
       </section>
       <template id="elementTemplate">
         <div class="element">
-          <img class="element__image" src="images/closeIcon.svg" alt="Картинка">
+          <img class="element__image" src="<%=require('./images/closeIcon.svg')%>" alt="Картинка">
           <button type='button' class="element__basura"></button>
           <div class="element__info">
             <h3 class="element__info-text"></h3>
@@ -54,7 +54,7 @@
     <div class="popup" id="popEdit">
       <div class="popup__container">
         <button type="button" class="popup__nosave-button" id="buttonNoSave">
-          <img src="images/closeIcon.svg" alt="Не сохранять" class="popup__nosave-image">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Не сохранять" class="popup__nosave-image">
         </button>
         <form class="profile-change" name="infoChangedK" id="profileEdit" novalidate>
           <h3 class="profile-change__title">
@@ -71,7 +71,7 @@
     <div class="popup" id="popAddPicture">
       <div class="popup__container">
         <button type="button" class="popup__nosave-button" id="buttonNoSavePic">
-          <img src="images/closeIcon.svg" alt="Не сохранять" class="popup__nosave-image">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Не сохранять" class="popup__nosave-image">
         </button>
         <form class="profile-change" name="infoChangedPl" id="cardAdd" novalidate>
           <h3 class="profile-change__title">
@@ -88,16 +88,16 @@
     <div class="popup" id="popShowPicture">
       <div class="popup__show">
         <button type="button" class="popup__nosave-button">
-          <img src="images/closeIcon.svg" alt="Выйти" class="popup__nosave-image">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Выйти" class="popup__nosave-image">
         </button>
         <div class="popup__list">
-          <img src="images/closeIcon.svg" alt="Отмена" class="popup__bigpicture" id="popShowPic">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Отмена" class="popup__bigpicture" id="popShowPic">
           <p class="popup__text" id="popShowText">tt</p>
         </div>        
       </div>
     </div>
   </div>
-  <script type="module" src="script/script__data.js"></script>
-  <script type="module" src="script/script.js"></script>
+  <!--<script type="module" src="script/script__data.js"></script>
+  <script type="module" src="script/script.js"></script>-->
 </body>
 </html>
