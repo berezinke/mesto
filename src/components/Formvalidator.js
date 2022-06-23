@@ -38,7 +38,6 @@ export default class FormValidator {
     const nameThis = this;
 
     this._toggleButtonState();
-
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
       inputElement.addEventListener('input', function () {

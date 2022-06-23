@@ -3,18 +3,16 @@ export default class Popup {
     this._popUp = document.querySelector(popupSelector);
   };
 
-  open() {
-    this._popUp.classList.add('popup_opened');
-  };
-  
-  close() {
-    this._popUp.classList.remove('popup_opened');
+  _setListenKeydown() { // закрытие pop по esc
+    document.addEventListener('keydown', (evt) => {
+      if (evt.key === 'Escape') {
+        this.close();
+      };      
+    }, { once: true });
   };
 
-  _handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-      this.close();
-   };
+  close() {
+    this._popUp.classList.remove('popup_opened');
   };
 
   setEventListeners() {
@@ -22,9 +20,6 @@ export default class Popup {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__nosave-image')) {
         this.close();
       };
-    });
-    this._popUp.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
     });
   };
 };

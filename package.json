@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "2.0.0",
   "description": "project with classes\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[Dmesto with \u001b[2~c\u001b[2~c\u001b classes",
-  "main": "script/script.js",
+  "main": "pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
