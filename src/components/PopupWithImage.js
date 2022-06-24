@@ -7,14 +7,12 @@ export default class PopupWithImage extends Popup {
     };
     
     open(elementInside) {
-      this._setListenKeydown();
+      super.open();
       this.source = elementInside;
-      this._popUp.classList.add('popup_opened');
       this.picPosition.src = this.source.querySelector('.element__image').src;
 
       const textContent = this.source.querySelector('.element__info').textContent;
       this.placeText.textContent = textContent;
       this.picPosition.alt = textContent;
-      this._popUp.classList.add('popup_opened');
     };
   };

@@ -7,11 +7,12 @@ export default class UserInfo {
     getUserInfo() {
       const nameCusto = this._name.textContent.trim();
       const profeccionCusto = this._profeccion.textContent.trim();
-      return { name: nameCusto, profession: profeccionCusto };
+      return { name: nameCusto, profeccion: profeccionCusto };
     };
   
-    setUserInfo(newName, newProfeccion) {
-      this._name.textContent = newName.trim();
-      this._profeccion.textContent = newProfeccion.trim();
+    setUserInfo(objValues) {
+      
+      this._name.textContent = objValues.nameK;
+      this._profeccion.textContent = objValues.profeccionK;
     };
 };

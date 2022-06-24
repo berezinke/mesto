@@ -20,16 +20,18 @@ const validationObject = {
    inputErrorClass: 'profile-change__input_type_error',
    errorClass: 'profile-change__error_visible'
  };
-const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
+
+const objAuthor = document.querySelector('#profileEdit'); // форма Кусто
+const objCard = document.querySelector('#cardAdd'); // форма Кусто
 
 const buttonAddPicture = document.querySelector('.profile__add-button'); // Новая карточка
 const cardsPosition = document.querySelector('.elements'); // Создание карточек
 const cardSelector = '#elementTemplate';
 
 // установка валидаторов на формы
-const formProfileValidator = new FormValidator(validationObject, formList[0]);
+const formProfileValidator = new FormValidator(validationObject, objAuthor);
 formProfileValidator.enableValidation();
-const formCardValidator = new FormValidator(validationObject, formList[1]);
+const formCardValidator = new FormValidator(validationObject, objCard);
 formCardValidator.enableValidation();
 
 // первоначальная отрисовка карточек
@@ -43,36 +45,30 @@ const cardList = new Section({renderer: (item) => {
 }}, cardsPosition);
 cardList.renderItems(initialCards);
 
-// Подготовка pop к открытию
-function clearSubmitPop(nameClassFormValidation) {
-   nameClassFormValidation._disabledButton();
-}
-
 // Редактирование Кусто
 const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist');
-const popAuthor = new PopupWithForm({popupSelector:'#popEdit', handleFormSubmit: (arrayValues) => {
-   dataListAuthor.setUserInfo(arrayValues[0], arrayValues[1])}, 
-   formValidatorObj: formProfileValidator});
+const popAuthor = new PopupWithForm({popupSelector:'#popEdit', 
+      handleFormSubmit: (objValues) => {dataListAuthor.setUserInfo(objValues)}});
 
 popAuthor.setEventListeners();
 buttonEdit.addEventListener('click', function() {
-   clearSubmitPop(formProfileValidator);
+   
+   formProfileValidator.clearFormValidation();
    nameCh.value = dataListAuthor.getUserInfo().name;
-   infoCh.value = dataListAuthor.getUserInfo().profession;
+   infoCh.value = dataListAuthor.getUserInfo().profeccion;
    popAuthor.open();
 });
 
 // добавление новой карточки
-const popNewCard = new PopupWithForm({popupSelector:'#popAddPicture', handleFormSubmit: (arrayValues) => {
-   const item = {name: arrayValues[0], link: arrayValues[1]};
+const popNewCard = new PopupWithForm({popupSelector:'#popAddPicture', handleFormSubmit: (objValues) => {
+   const item = {name: objValues.namePl, link: objValues.picturePl};
    const cardElement = createCard(item, cardSelector, handleCardClick);
 
-   cardList.addItemPrepend(cardElement)
-}, formValidatorObj: formCardValidator});
+   cardList.addItemPrepend(cardElement)}});
 
 popNewCard.setEventListeners();
 buttonAddPicture.addEventListener('click', () => {
-   clearSubmitPop(formCardValidator);
+   formCardValidator.clearFormValidation();
    popNewCard.open();
 });
 

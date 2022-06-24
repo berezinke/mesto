@@ -50,7 +50,7 @@ export default class FormValidator {
   _disabledButton() {
     this._submitButton.classList.add(this._classButtonSubmitInactiv);
     this._submitButton.setAttribute('disabled', true);
-  }
+  };
 
   _hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
@@ -65,7 +65,14 @@ export default class FormValidator {
       this._hideInputError(inputElement);
     };
   };
-
+  
+  clearFormValidation() {
+    this._inputList.forEach((fieldInput) => {
+      this._hideInputError(fieldInput);
+    });
+    this._toggleButtonState();
+  };
+  
   enableValidation() {
     this._setEventListeners();
   };
