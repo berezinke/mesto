@@ -12,6 +12,7 @@
   white-space: nowrap;
   overflow: hidden;
  }
+ 
 @media screen and (max-width: 392px) {
   .profile__title {
     font-size: 27px;

@@ -1,15 +1,14 @@
 .element__button-liked {
   position: relative;
-  margin: 0 21px 0 0;
-  padding: 5px 5px 0 0;
-  max-width: 22px;
-  max-height: 19px;
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  padding: 0;
+    
+  width: 22px;
+  height: 19px;
   border: none;
   cursor: pointer;
   background-color: white;
-  background-image: url('../../../images/heart_blanc.svg');
+  
 }
 .element__button-liked:hover{
   opacity: 0.5;

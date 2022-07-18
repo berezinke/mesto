@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <!--<link rel="stylesheet" href="pages/index.css">-->
+
   <title>Интересные места России</title>
 </head>
 <body class="body">
@@ -14,7 +16,10 @@
     <main>
       <section class="profile">
         <div class="profile__information">
-          <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Портрет Кусто" class="profile__avatar">
+          <button type='button' class="profile__edit-avatar">
+            <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Портрет Кусто" class="profile__avatar">
+            <img src="<%=require('./images/pen.svg')%>" alt="Редактировать" class="profile__edit-avatarPen">
+          </button>
           <div class="profile__info">
             <div class="profile__text">
               <h1 class="profile__title" id="nameScientist">
@@ -41,7 +46,14 @@
           <button type='button' class="element__basura"></button>
           <div class="element__info">
             <h3 class="element__info-text"></h3>
-            <button type="button" class="element__button-liked"></button>
+            <div class="element__likes">
+              <button type="button" class="element__button-liked">
+                <img src="<%=require('./images/heart_blanc.svg')%>" alt="Сердечко" class="element__button-liked-picture">
+              </button>
+              <p class="element__likes-info">
+                0
+              </p>
+            </div>
           </div>
         </div>
       </template>
@@ -85,6 +97,34 @@
         </form>
       </div>
     </div>
+    <div class="popup" id="popEditAvatar">
+      <div class="popup__container">
+        <button type="button" class="popup__nosave-button" id="buttonNoSavePic">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Не сохранять" class="popup__nosave-image">
+        </button>
+        <form class="profile-change" name="infoChangedPl" id="avatarEdit" novalidate>
+          <h3 class="profile-change__title">
+            Обновить аватар
+          </h3>
+          <input type="url" class="profile-change__input" name="picturePl" id="avatarEditPop" placeholder="Адрес картинки" required>
+          <span class="profile-change__error" id="placePicNew-error">Ок</span>
+          <button type="submit" class="profile-change__submit" id="ButtonCreate">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="popIsDelete">
+      <div class="popup__container">
+        <button type="button" class="popup__nosave-button" id="buttonNoSavePic">
+          <img src="<%=require('./images/closeIcon.svg')%>" alt="Не сохранять" class="popup__nosave-image">
+        </button>
+        <form class="profile-change" name="infoChangedPl" id="cardAdd" novalidate>
+          <h3 class="profile-change__title">
+            Вы уверены?
+          </h3>
+          <button type="submit" class="profile-change__submit" id="ButtonDelete">Да</button>
+        </form>
+      </div>
+    </div>
     <div class="popup" id="popShowPicture">
       <div class="popup__show">
         <button type="button" class="popup__nosave-button">
@@ -97,7 +137,7 @@
       </div>
     </div>
   </div>
-  <!--<script type="module" src="script/script__data.js"></script>
+  <!--<script type="module" src="script/script__data.js"></script> 
   <script type="module" src="script/script.js"></script>-->
 </body>
 </html>

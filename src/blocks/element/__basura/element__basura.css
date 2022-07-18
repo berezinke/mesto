@@ -1,5 +1,6 @@
 .element__basura {
   position: absolute;
+  display: none;
   top: 20px;
   right: 20px;
   margin: 0;
@@ -15,3 +16,6 @@
 .element__basura:hover{
   opacity: 0.5;
 }
+.element__basura_activ {
+  display: flex;
+};

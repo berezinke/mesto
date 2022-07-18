@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
       this._arrayFieldInput = this._popUp.querySelectorAll('.profile-change__input');
       
       this._form = this._popUp.querySelector('.profile-change');
+      // this._buttonSubmitText = this._form.querySelector('.profile-change__submit').textContent;
       this._mesto = this;
     };
     

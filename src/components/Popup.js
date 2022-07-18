@@ -21,6 +21,7 @@ export default class Popup {
   };
 
   setEventListeners() {
+    
     this._popUp.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__nosave-image')) {
         this.close();
