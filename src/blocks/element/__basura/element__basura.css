@@ -11,7 +11,8 @@
   border: none;
   background-image: url('../../../images/trash.svg');
   background-size: contain;
-  background-color: rgba(138, 7, 7, 0);
+  background-color: rgba(248, 243, 243, 0);
+  box-shadow: 1px 1px white;
 }
 .element__basura:hover{
   opacity: 0.5;

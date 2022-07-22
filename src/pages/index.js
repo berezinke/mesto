@@ -2,41 +2,20 @@ import Card from '../components/Card.js';
 import Section from '../components/Section.js'
 import PopupWithForm from '../components/popupwithform.js';
 import PopupWithImage from '../components/popupwithimage.js';
+import PopupIsDelete from '../components/PopupIsDelete.js';
 import UserInfo from '../components/userinfo.js';
 import FormValidator from '../components/formvalidator.js';
 import Api from '../components/Api.js';
-
 import '../pages/index.css';
+import {buttonEdit, nameCh, infoCh, objAuthor, objCard, objAvatar} from'../utils/constants.js';
+import {validationObject} from'../utils/constants.js';
+import {buttonAddPicture, cardsPosition, cardSelector} from'../utils/constants.js';
+import {miToken, pathToServer} from'../utils/constants.js';
+import {headers} from'../utils/constants.js';
 
-const buttonEdit = document.querySelector('#button_edit'); // Кусто
-const nameCh = document.querySelector('#change-name');
-const infoCh = document.querySelector('#change-profeccion');
-
-const validationObject = {
-   formSelector: '.profile-change',
-   inputSelector: '.profile-change__input',
-   submitButtonSelector: '.profile-change__submit',
-   inactiveButtonClass: 'profile-change__submit_disabled',
-   inputErrorClass: 'profile-change__input_type_error',
-   errorClass: 'profile-change__error_visible'
- };
-
-const objAuthor = document.querySelector('#profileEdit'); // форма Кусто
-const objCard = document.querySelector('#cardAdd'); // форма Карта
-const objAvatar = document.querySelector('#avatarEdit'); // форма Аватар
-
-const buttonAddPicture = document.querySelector('.profile__add-button'); // Новая карточка
-const cardsPosition = document.querySelector('.elements'); // Создание карточек
-const cardSelector = '#elementTemplate';
-
-// Данные о группе, токене ...
-const miCogort = 'cohort-46';
-const miToken = '17354b5a-cdf3-4826-b8f6-745070d32c9c';
-const pathToServer = 'https://mesto.nomoreparties.co/v1/';
-const pathToCard = `${pathToServer}${miCogort}/cards`;
-const pathToAuthor = `${pathToServer}${miCogort}/users/me`;
 let ownerIdServ = '';
-const apiForServerInfo = new Api(pathToAuthor, pathToCard, miToken, objAuthor, objCard, objAvatar);
+
+const apiForServerInfo = new Api(pathToServer, headers);
 
 // Редактирование аватара
 const buttonEditAvatar = document.querySelector('.profile__edit-avatar');
@@ -48,32 +27,37 @@ const formProfileValidator = new FormValidator(validationObject, objAuthor);
 formProfileValidator.enableValidation();
 const formCardValidator = new FormValidator(validationObject, objCard);
 formCardValidator.enableValidation();
+const formAvatarValidator = new FormValidator(validationObject, objAvatar);
+formAvatarValidator.enableValidation();
 
 
 // Редактирование Кусто
-const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist');
+const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist', '.profile__avatar', ownerIdServ);
 const popAuthor = new PopupWithForm(
    {popupSelector:'#popEdit', handleFormSubmit: 
       (objValues) => {dataListAuthor.setUserInfo(objValues);
                       apiForServerInfo.setAuthorInfo(
                         {newName: objValues.nameK, 
                          newAbout: objValues.profeccionK
-                       })
+                       }).catch((err) => {
+                        console.log('Ошибка. Запрос на запись информации об авторе не выполнен: ', err);
+                      })
                      }
 });
 
 apiForServerInfo.getAuthorInfo()
    .then((res) => {
-      dataListAuthor.setUserInfo({nameK: res.name, profeccionK: res.about})
-      ownerIdServ = res._id
-      avatarInfoPictire.src = res.avatar;
-      // console.log(ownerIdServ)
+      dataListAuthor.setUserInfo({nameK: res.name, profeccionK: res.about, avatarK: res.avatar})
+      ownerIdServ = res._id;
    })
    .catch((err) => {
-      console.log('Ошибка. Запрос на получение информации об авторе не выполнен: ', err);
+      console.log('Ошибка. Запрос на получение информации об авторе не выполнен: ', err)
+   .finally((res) => {
+      return res
+   })
 })
 
-popAuthor.setEventListeners();
+popAuthor.setEventListenersForForm();
 buttonEdit.addEventListener('click', function() {
    formProfileValidator.clearFormValidation();
    nameCh.value = dataListAuthor.getUserInfo().name;
@@ -83,7 +67,7 @@ buttonEdit.addEventListener('click', function() {
 
 // первоначальная отрисовка карточек
 function createCard(item, cardSelector, handleCardClick) {
-   const card = new Card(item, cardSelector, handleCardClick, ownerIdServ, apiForServerInfo);
+   const card = new Card(item, cardSelector, handleCardClick, ownerIdServ, apiForServerInfo, handleTrashClick);
    return card.generateCard();
 }
 const cardList = new Section({renderer: (item) => {
@@ -117,7 +101,7 @@ const popNewCard = new PopupWithForm(
       }
    });
 
-popNewCard.setEventListeners();
+popNewCard.setEventListenersForForm();
 buttonAddPicture.addEventListener('click', () => {
    formCardValidator.clearFormValidation();
    popNewCard.open();
@@ -138,11 +122,11 @@ const popEditAvatar = new PopupWithForm(
                console.log('Ошибка. Запрос на изменение аватара не выполнен: ', err);
          })
       }
-   });
+   });   
 
-popEditAvatar.setEventListeners();
+popEditAvatar.setEventListenersForForm();
 buttonEditAvatar.addEventListener('click', () => {
-   formCardValidator.clearFormValidation();
+   formAvatarValidator.clearFormValidation();
    avatarInPop.value = avatarInfoPictire.src;
    popEditAvatar.open();
 });
@@ -154,3 +138,16 @@ bigPicture.setEventListeners();
 function handleCardClick(elementInside) {
    bigPicture.open(elementInside);
 };
+
+const popIsDeleted = new PopupIsDelete(
+   {popupSelector:'#popIsDelete', handleFormSubmit: (objInside, elementInside) => {
+
+      objInside._trashElement(elementInside)}});
+
+popIsDeleted.setEventListenersForDelete();
+
+function handleTrashClick(objInside, elementInside) {
+   popIsDeleted.open(objInside, elementInside);
+};
+
+

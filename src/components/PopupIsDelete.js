@@ -3,16 +3,28 @@ export default class PopupIsDelete extends Popup {
     constructor({popupSelector, handleFormSubmit}) {
       super(popupSelector);
       this._handleFormSubmit = handleFormSubmit;
-      this._button = this._popUp.querySelector('#ButtonDelete');
-      this._mesto = this;
     };
-    
-    setEventListeners() {
+
+    open(objInside, elementInside) {
+      super.open();
+      this._objInside = objInside;
+      this._elementInside = elementInside;
+    }
+
+    setEventListenersForDelete() {
       super.setEventListeners();
-      this._button.addEventListener('click', (evt) => {
+      this._form.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._handleFormSubmit();
-        this.close();
+  
+        this._old = this._textButton.textContent;
+        this._textButton.textContent = 'Сохранение...';
+               
+        if (!this._mesto._handleFormSubmit(this._objInside, this._elementInside)) {
+          this.close();
+          this._textButton.textContent = this._old;
+        } else {
+          alert('Error')
+        };
       });
     };
 };

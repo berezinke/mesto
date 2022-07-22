@@ -1,13 +1,12 @@
-import PopupIsDelete from '../components/PopupIsDelete.js';
-
 export default class Card {
-    constructor(elementArrCard, cardSelector, handleCardClick, owner, apiForServerInfo) {
+    constructor(elementArrCard, cardSelector, handleCardClick, owner, apiForServerInfo, handleTrashClick) {
       this._cardData = elementArrCard;
       this._cardSelector = cardSelector;
       this._handleCardClick = handleCardClick;
       this._owner = owner;
       this._idCard = elementArrCard.idCard;
       this._api = apiForServerInfo;
+      this._handleTrashClick = handleTrashClick;
     };
     _getTemplate() {
       const cardElement = document.querySelector(this._cardSelector).content.querySelector('.element').cloneNode(true);
@@ -59,14 +58,8 @@ export default class Card {
         objInside._toggleLike(objInside._buttonLiked, idCardInside);
       });
       if (!this._cardData.owner || this._cardData.owner._id == this._owner) {
-        this._buttonTrash.addEventListener('click', function() {
-          // Дописываем обработку удаления
-          const popIsDeleted = new PopupIsDelete(
-            {popupSelector:'#popIsDelete', handleFormSubmit: () => {
-              objInside._trashElement(elementInside)}});
-
-            popIsDeleted.open()
-            popIsDeleted.setEventListeners();
+        this._buttonTrash.addEventListener('click', () => {
+          this._handleTrashClick(objInside, elementInside);
         });
         this._buttonTrash.classList.add('element__basura_activ');
       }
