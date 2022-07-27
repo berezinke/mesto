@@ -31,19 +31,19 @@ export default class FormValidator {
     const errorElement = this._elementValidation.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._classInputError);
     errorElement.classList.remove(this._inputErrorVisible);
-    errorElement.textContent = 'Ок';
+    errorElement.textContent = '';
   };
 
   _setEventListeners() {
-    const nameThis = this;
+    // const nameThis = this;
 
     this._toggleButtonState();
     
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
-      inputElement.addEventListener('input', function () {
-        nameThis._checkInputValidity(inputElement);
-        nameThis._toggleButtonState();
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+        this._toggleButtonState();
       });
     });
   };

@@ -2,14 +2,15 @@ export default class UserInfo {
     constructor(nameCh, infoCh, avatarCh) {
       this._name = document.querySelector(nameCh);
       this._profeccion = document.querySelector(infoCh);
-      this._avatar = document.querySelector(avatarCh);      
+      this._avatar = document.querySelector(avatarCh);
+      // this._api = apiForServerInfo;
     };
     
     getUserInfo() {
       const nameCusto = this._name.textContent.trim();
       const profeccionCusto = this._profeccion.textContent.trim();
       
-      return { name: nameCusto, profeccion: profeccionCusto};
+      return { nameK: nameCusto, profeccionK: profeccionCusto};
     };
   
     setUserInfo(objValues) {

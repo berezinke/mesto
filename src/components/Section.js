@@ -1,7 +1,7 @@
 export default class Section {
-  constructor({renderer}, containerSelector) {
+  constructor({renderer}, cardsPosition) {
     this._renderer = renderer;
-    this._container = containerSelector;
+    this._container = cardsPosition;
   };
   renderItems(initialArray) {
     initialArray.forEach(item => {

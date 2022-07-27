@@ -7,7 +7,7 @@ import UserInfo from '../components/userinfo.js';
 import FormValidator from '../components/formvalidator.js';
 import Api from '../components/Api.js';
 import '../pages/index.css';
-import {buttonEdit, nameCh, infoCh, objAuthor, objCard, objAvatar} from'../utils/constants.js';
+import {buttonEdit, objAuthor, objCard, objAvatar} from'../utils/constants.js';
 import {validationObject} from'../utils/constants.js';
 import {buttonAddPicture, cardsPosition, cardSelector} from'../utils/constants.js';
 import {miToken, pathToServer} from'../utils/constants.js';
@@ -30,39 +30,18 @@ formCardValidator.enableValidation();
 const formAvatarValidator = new FormValidator(validationObject, objAvatar);
 formAvatarValidator.enableValidation();
 
-
 // Редактирование Кусто
-const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist', '.profile__avatar', ownerIdServ);
+const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist', '.profile__avatar');
+const promiseAuthor = apiForServerInfo.getAuthorInfo();
+
 const popAuthor = new PopupWithForm(
    {popupSelector:'#popEdit', handleFormSubmit: 
       (objValues) => {dataListAuthor.setUserInfo(objValues);
-                      apiForServerInfo.setAuthorInfo(
+                      return apiForServerInfo.setAuthorInfo(
                         {newName: objValues.nameK, 
                          newAbout: objValues.profeccionK
-                       }).catch((err) => {
-                        console.log('Ошибка. Запрос на запись информации об авторе не выполнен: ', err);
-                      })
+                       })
                      }
-});
-
-apiForServerInfo.getAuthorInfo()
-   .then((res) => {
-      dataListAuthor.setUserInfo({nameK: res.name, profeccionK: res.about, avatarK: res.avatar})
-      ownerIdServ = res._id;
-   })
-   .catch((err) => {
-      console.log('Ошибка. Запрос на получение информации об авторе не выполнен: ', err)
-   .finally((res) => {
-      return res
-   })
-})
-
-popAuthor.setEventListenersForForm();
-buttonEdit.addEventListener('click', function() {
-   formProfileValidator.clearFormValidation();
-   nameCh.value = dataListAuthor.getUserInfo().name;
-   infoCh.value = dataListAuthor.getUserInfo().profeccion;
-   popAuthor.open();
 });
 
 // первоначальная отрисовка карточек
@@ -75,14 +54,27 @@ const cardList = new Section({renderer: (item) => {
    cardList.addItemAppend(cardElement);
 }}, cardsPosition);
 
-apiForServerInfo.getInitCard()
-   .then((res) => {
-      const initialCards = res;
+const promiseAllCard = apiForServerInfo.getInitCard();
+
+Promise.all([promiseAuthor, promiseAllCard])
+   .then(([resAuthor, resAllCard]) => {
+      dataListAuthor.setUserInfo({nameK: resAuthor.name, profeccionK: resAuthor.about, avatarK: resAuthor.avatar});
+      ownerIdServ = resAuthor._id;
+
+      const initialCards = resAllCard;
       cardList.renderItems(initialCards);
+
+      popAuthor.setEventListeners();
+      buttonEdit.addEventListener('click', function() {
+         formProfileValidator.clearFormValidation();
+
+         popAuthor.setInputValues(dataListAuthor.getUserInfo());
+         popAuthor.open();
+      });
    })
    .catch((err) => {
-      console.log('Ошибка. Запрос на инфу по карточкам не выполнен: ', err);
-})
+      console.log('Ошибка. Запрос к серверу не выполнен: ', err)
+   })
 
 // добавление новой карточки
 const popNewCard = new PopupWithForm(
@@ -90,18 +82,15 @@ const popNewCard = new PopupWithForm(
       handleFormSubmit: (objValues) => {
          const item = {name: objValues.namePl, link: objValues.picturePl};
          
-         apiForServerInfo.addCardToServer(item)
+         return apiForServerInfo.addCardToServer(item)
             .then((res) => {
                const cardElement = createCard(res, cardSelector, handleCardClick);
                cardList.addItemPrepend(cardElement)
             })
-            .catch((err) => {
-               console.log('Ошибка. Запрос на добавление карточки не выполнен: ', err);
-         })
       }
    });
 
-popNewCard.setEventListenersForForm();
+popNewCard.setEventListeners();
 buttonAddPicture.addEventListener('click', () => {
    formCardValidator.clearFormValidation();
    popNewCard.open();
@@ -113,41 +102,37 @@ const popEditAvatar = new PopupWithForm(
       handleFormSubmit: (objValues) => {
          const item = {avatar: objValues.picturePl};
          
-         // console.log(item)
-         apiForServerInfo.setAuthorAvatar(item)
+         return apiForServerInfo.setAuthorAvatar(item)
             .then((res) => {
                avatarInfoPictire.src = res.avatar
             })
-            .catch((err) => {
-               console.log('Ошибка. Запрос на изменение аватара не выполнен: ', err);
-         })
       }
    });   
 
-popEditAvatar.setEventListenersForForm();
+popEditAvatar.setEventListeners();
 buttonEditAvatar.addEventListener('click', () => {
    formAvatarValidator.clearFormValidation();
-   avatarInPop.value = avatarInfoPictire.src;
+   avatarInPop.value = '';
    popEditAvatar.open();
 });
 
 // Открытие большой картинки
 const bigPicture = new PopupWithImage('#popShowPicture');
-bigPicture.setEventListeners();
+// bigPicture.setEventListeners();
 
 function handleCardClick(elementInside) {
-   bigPicture.open(elementInside);
+   const elementImage = elementInside.querySelector('.element__image').src;
+   const elementInfo = elementInside.querySelector('.element__info').textContent;
+   bigPicture.open(elementInside, elementImage, elementInfo);
 };
 
 const popIsDeleted = new PopupIsDelete(
    {popupSelector:'#popIsDelete', handleFormSubmit: (objInside, elementInside) => {
 
-      objInside._trashElement(elementInside)}});
+      return objInside.trashElement(elementInside)}});
 
-popIsDeleted.setEventListenersForDelete();
+popIsDeleted.setEventListeners();
 
 function handleTrashClick(objInside, elementInside) {
    popIsDeleted.open(objInside, elementInside);
 };
-
-

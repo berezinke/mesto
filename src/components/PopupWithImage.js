@@ -6,13 +6,11 @@ export default class PopupWithImage extends Popup {
       this.placeText = this._popUp.querySelector('.popup__text');
     };
     
-    open(elementInside) {
+    open(elementInside, elementImage, elementInfo) {
       super.open();
       this.source = elementInside;
-      this.picPosition.src = this.source.querySelector('.element__image').src;
-
-      const textContent = this.source.querySelector('.element__info').textContent;
-      this.placeText.textContent = textContent;
-      this.picPosition.alt = textContent;
+      this.picPosition.src = elementImage;
+      this.placeText.textContent = elementInfo;
+      this.picPosition.alt = elementInfo;
     };
   };

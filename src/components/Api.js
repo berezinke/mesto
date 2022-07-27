@@ -36,7 +36,6 @@ export default class Api {
 
   // Отправка информации об авторе на сервер
   setAuthorInfo({newName, newAbout}) {
-    
     return fetch(this._pathToAuthor, {
       method: 'PATCH',
       headers: this._headers,
