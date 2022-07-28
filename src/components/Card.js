@@ -47,7 +47,6 @@ export default class Card {
     };
 
     _setEventListeners() {
-      // const objInside = this;
       const elementInside = this._element;
       const idCardInside = elementInside.idCard;
 
@@ -62,21 +61,9 @@ export default class Card {
       }
       
       this._buttonImage.addEventListener('click', () => {
-        this._handleCardClick(elementInside);
+        // this._handleCardClick(elementInside);
+        this._handleCardClick(this._cardData);
       });
-      /*this._buttonLiked.addEventListener('click', function() {
-        objInside._toggleLike(objInside._buttonLiked, idCardInside);
-      });
-      if (!this._cardData.owner || this._cardData.owner._id == this._owner) {
-        this._buttonTrash.addEventListener('click', () => {
-          this._handleTrashClick(objInside, elementInside);
-        });
-        this._buttonTrash.classList.add('element__basura_activ');
-      }
-      
-      this._buttonImage.addEventListener('click', () => {
-        this._handleCardClick(elementInside);
-      });*/
     };
 
 

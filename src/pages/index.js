@@ -33,15 +33,15 @@ formAvatarValidator.enableValidation();
 // Редактирование Кусто
 const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist', '.profile__avatar');
 const promiseAuthor = apiForServerInfo.getAuthorInfo();
+const actionThenAuthor = {nameClass: dataListAuthor, nameMethod: dataListAuthor.setUserInfo};
 
 const popAuthor = new PopupWithForm(
    {popupSelector:'#popEdit', handleFormSubmit: 
-      (objValues) => {dataListAuthor.setUserInfo(objValues);
-                      return apiForServerInfo.setAuthorInfo(
+      (objValues) => {return apiForServerInfo.setAuthorInfo(
                         {newName: objValues.nameK, 
                          newAbout: objValues.profeccionK
                        })
-                     }
+                     }, actionThen: actionThenAuthor
 });
 
 // первоначальная отрисовка карточек
@@ -104,7 +104,7 @@ const popEditAvatar = new PopupWithForm(
          
          return apiForServerInfo.setAuthorAvatar(item)
             .then((res) => {
-               avatarInfoPictire.src = res.avatar
+               avatarInfoPictire.src = dataListAuthor.setAvatar(res.avatar)
             })
       }
    });   
@@ -112,18 +112,14 @@ const popEditAvatar = new PopupWithForm(
 popEditAvatar.setEventListeners();
 buttonEditAvatar.addEventListener('click', () => {
    formAvatarValidator.clearFormValidation();
-   avatarInPop.value = '';
    popEditAvatar.open();
 });
 
 // Открытие большой картинки
 const bigPicture = new PopupWithImage('#popShowPicture');
-// bigPicture.setEventListeners();
 
-function handleCardClick(elementInside) {
-   const elementImage = elementInside.querySelector('.element__image').src;
-   const elementInfo = elementInside.querySelector('.element__info').textContent;
-   bigPicture.open(elementInside, elementImage, elementInfo);
+function handleCardClick(cardData) {
+   bigPicture.open(cardData, cardData.link, cardData.name);
 };
 
 const popIsDeleted = new PopupIsDelete(

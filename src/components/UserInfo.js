@@ -3,7 +3,6 @@ export default class UserInfo {
       this._name = document.querySelector(nameCh);
       this._profeccion = document.querySelector(infoCh);
       this._avatar = document.querySelector(avatarCh);
-      // this._api = apiForServerInfo;
     };
     
     getUserInfo() {
@@ -13,12 +12,21 @@ export default class UserInfo {
       return { nameK: nameCusto, profeccionK: profeccionCusto};
     };
   
-    setUserInfo(objValues) {
+    setUserInfo(objValues, nameClassImpact) {
+      if (nameClassImpact) {
+        nameClassImpact._name.textContent = objValues.nameK;
+        nameClassImpact._profeccion.textContent = objValues.profeccionK;
+      }
+      else {
+        this._name.textContent = objValues.nameK;
+        this._profeccion.textContent = objValues.profeccionK;
+      };    
       
-      this._name.textContent = objValues.nameK;
-      this._profeccion.textContent = objValues.profeccionK;
       if (objValues.avatarK) {
-        this._avatar.src = objValues.avatarK;
+        this._avatar.src = this.setAvatar(objValues.avatarK)
       }      
+    };
+    setAvatar(avatarK) {
+      return avatarK
     };
 };
