@@ -33,7 +33,6 @@ formAvatarValidator.enableValidation();
 // Редактирование Кусто
 const dataListAuthor = new UserInfo('#nameScientist', '#profeccionScientist', '.profile__avatar');
 const promiseAuthor = apiForServerInfo.getAuthorInfo();
-const actionThenAuthor = {nameClass: dataListAuthor, nameMethod: dataListAuthor.setUserInfo};
 
 const popAuthor = new PopupWithForm(
    {popupSelector:'#popEdit', handleFormSubmit: 
@@ -41,7 +40,10 @@ const popAuthor = new PopupWithForm(
                         {newName: objValues.nameK, 
                          newAbout: objValues.profeccionK
                        })
-                     }, actionThen: actionThenAuthor
+                       .then((res) => {
+                        dataListAuthor.setUserInfo(objValues);                        
+                     })
+                     }
 });
 
 // первоначальная отрисовка карточек
@@ -104,7 +106,7 @@ const popEditAvatar = new PopupWithForm(
          
          return apiForServerInfo.setAuthorAvatar(item)
             .then((res) => {
-               avatarInfoPictire.src = dataListAuthor.setAvatar(res.avatar)
+               dataListAuthor.setAvatar(objValues.picturePl)
             })
       }
    });   

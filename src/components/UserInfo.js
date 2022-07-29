@@ -12,21 +12,15 @@ export default class UserInfo {
       return { nameK: nameCusto, profeccionK: profeccionCusto};
     };
   
-    setUserInfo(objValues, nameClassImpact) {
-      if (nameClassImpact) {
-        nameClassImpact._name.textContent = objValues.nameK;
-        nameClassImpact._profeccion.textContent = objValues.profeccionK;
-      }
-      else {
-        this._name.textContent = objValues.nameK;
-        this._profeccion.textContent = objValues.profeccionK;
-      };    
-      
+    setUserInfo(objValues) {
+      this._name.textContent = objValues.nameK;
+      this._profeccion.textContent = objValues.profeccionK;
+            
       if (objValues.avatarK) {
-        this._avatar.src = this.setAvatar(objValues.avatarK)
+        this.setAvatar(objValues.avatarK)
       }      
     };
     setAvatar(avatarK) {
-      return avatarK
+      this._avatar.src = avatarK
     };
 };
